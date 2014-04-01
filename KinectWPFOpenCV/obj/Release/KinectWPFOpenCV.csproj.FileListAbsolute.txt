@@ -1,0 +1,9 @@
+C:\Users\Burak\Dropbox\OpenCV-WPF-Kinect-master\OpenCV-WPF-Kinect-master\KinectWPFOpenCV\obj\Release\MainWindow.baml
+C:\Users\Burak\Dropbox\OpenCV-WPF-Kinect-master\OpenCV-WPF-Kinect-master\KinectWPFOpenCV\obj\Release\App.baml
+C:\Users\Burak\Dropbox\OpenCV-WPF-Kinect-master\OpenCV-WPF-Kinect-master\KinectWPFOpenCV\obj\Release\MainWindow.g.cs
+C:\Users\Burak\Dropbox\OpenCV-WPF-Kinect-master\OpenCV-WPF-Kinect-master\KinectWPFOpenCV\obj\Release\App.g.cs
+C:\Users\Burak\Dropbox\OpenCV-WPF-Kinect-master\OpenCV-WPF-Kinect-master\KinectWPFOpenCV\obj\Release\KinectWPFOpenCV_Content.g.cs
+C:\Users\Burak\Dropbox\OpenCV-WPF-Kinect-master\OpenCV-WPF-Kinect-master\KinectWPFOpenCV\obj\Release\KinectWPFOpenCV_MarkupCompile.cache
+C:\Users\Burak\Dropbox\OpenCV-WPF-Kinect-master\OpenCV-WPF-Kinect-master\KinectWPFOpenCV\obj\Release\KinectWPFOpenCV.g.resources
+C:\Users\Burak\Dropbox\OpenCV-WPF-Kinect-master\OpenCV-WPF-Kinect-master\KinectWPFOpenCV\obj\Release\KinectWPFOpenCV.Properties.Resources.resources
+C:\Users\Burak\Dropbox\OpenCV-WPF-Kinect-master\OpenCV-WPF-Kinect-master\KinectWPFOpenCV\obj\Release\KinectWPFOpenCV.csproj.GenerateResource.Cache

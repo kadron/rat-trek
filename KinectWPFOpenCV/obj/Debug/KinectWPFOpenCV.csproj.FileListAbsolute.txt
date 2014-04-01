@@ -1,0 +1,69 @@
+c:\users\erik\documents\visual studio 2012\Projects\KinectWPFOpenCV\KinectWPFOpenCV\bin\Debug\KinectWPFOpenCV.exe.config
+c:\users\erik\documents\visual studio 2012\Projects\KinectWPFOpenCV\KinectWPFOpenCV\obj\Debug\MainWindow.baml
+c:\users\erik\documents\visual studio 2012\Projects\KinectWPFOpenCV\KinectWPFOpenCV\obj\Debug\MainWindow.g.cs
+c:\users\erik\documents\visual studio 2012\Projects\KinectWPFOpenCV\KinectWPFOpenCV\obj\Debug\KinectWPFOpenCV_Content.g.cs
+c:\users\erik\documents\visual studio 2012\Projects\KinectWPFOpenCV\KinectWPFOpenCV\obj\Debug\KinectWPFOpenCV_MarkupCompile.cache
+c:\users\erik\documents\visual studio 2012\Projects\KinectWPFOpenCV\KinectWPFOpenCV\obj\Debug\App.baml
+c:\users\erik\documents\visual studio 2012\Projects\KinectWPFOpenCV\KinectWPFOpenCV\obj\Debug\App.g.cs
+c:\users\erik\documents\visual studio 2012\Projects\KinectWPFOpenCV\KinectWPFOpenCV\obj\Debug\KinectWPFOpenCV.g.resources
+c:\users\erik\documents\visual studio 2012\Projects\KinectWPFOpenCV\KinectWPFOpenCV\obj\Debug\KinectWPFOpenCV.Properties.Resources.resources
+c:\users\erik\documents\visual studio 2012\Projects\KinectWPFOpenCV\KinectWPFOpenCV\obj\Debug\KinectWPFOpenCV.csproj.GenerateResource.Cache
+c:\users\erik\documents\visual studio 2012\Projects\KinectWPFOpenCV\KinectWPFOpenCV\bin\Debug\opencv_core231.dll
+c:\users\erik\documents\visual studio 2012\Projects\KinectWPFOpenCV\KinectWPFOpenCV\bin\Debug\opencv_highgui231.dll
+c:\users\erik\documents\visual studio 2012\Projects\KinectWPFOpenCV\KinectWPFOpenCV\bin\Debug\opencv_imgproc231.dll
+c:\users\erik\documents\visual studio 2012\Projects\KinectWPFOpenCV\KinectWPFOpenCV\bin\Debug\KinectWPFOpenCV.exe
+c:\users\erik\documents\visual studio 2012\Projects\KinectWPFOpenCV\KinectWPFOpenCV\bin\Debug\KinectWPFOpenCV.pdb
+c:\users\erik\documents\visual studio 2012\Projects\KinectWPFOpenCV\KinectWPFOpenCV\bin\Debug\Emgu.CV.dll
+c:\users\erik\documents\visual studio 2012\Projects\KinectWPFOpenCV\KinectWPFOpenCV\bin\Debug\Emgu.CV.UI.dll
+c:\users\erik\documents\visual studio 2012\Projects\KinectWPFOpenCV\KinectWPFOpenCV\bin\Debug\Emgu.Util.dll
+c:\users\erik\documents\visual studio 2012\Projects\KinectWPFOpenCV\KinectWPFOpenCV\bin\Debug\WriteableBitmapEx.Wpf.dll
+c:\users\erik\documents\visual studio 2012\Projects\KinectWPFOpenCV\KinectWPFOpenCV\bin\Debug\ZedGraph.dll
+c:\users\erik\documents\visual studio 2012\Projects\KinectWPFOpenCV\KinectWPFOpenCV\bin\Debug\Emgu.CV.xml
+c:\users\erik\documents\visual studio 2012\Projects\KinectWPFOpenCV\KinectWPFOpenCV\bin\Debug\Emgu.CV.UI.xml
+c:\users\erik\documents\visual studio 2012\Projects\KinectWPFOpenCV\KinectWPFOpenCV\bin\Debug\Emgu.Util.xml
+c:\users\erik\documents\visual studio 2012\Projects\KinectWPFOpenCV\KinectWPFOpenCV\obj\Debug\KinectWPFOpenCV.exe
+c:\users\erik\documents\visual studio 2012\Projects\KinectWPFOpenCV\KinectWPFOpenCV\obj\Debug\KinectWPFOpenCV.pdb
+c:\users\erik\documents\visual studio 2012\Projects\KinectWPFOpenCV\KinectWPFOpenCV\obj\Debug\KinectWPFOpenCV.csprojResolveAssemblyReference.cache
+C:\Users\CS-Z21\Documents\Visual Studio 2012\Projects\OpenCV-WPF-Kinect-master\KinectWPFOpenCV\bin\Debug\KinectWPFOpenCV.exe.config
+C:\Users\CS-Z21\Documents\Visual Studio 2012\Projects\OpenCV-WPF-Kinect-master\KinectWPFOpenCV\obj\Debug\KinectWPFOpenCV.exe
+C:\Users\CS-Z21\Documents\Visual Studio 2012\Projects\OpenCV-WPF-Kinect-master\KinectWPFOpenCV\obj\Debug\KinectWPFOpenCV.pdb
+C:\Users\CS-Z21\Documents\Visual Studio 2012\Projects\OpenCV-WPF-Kinect-master\KinectWPFOpenCV\obj\Debug\KinectWPFOpenCV.csprojResolveAssemblyReference.cache
+C:\Users\CS-Z21\Documents\Visual Studio 2012\Projects\OpenCV-WPF-Kinect-master\KinectWPFOpenCV\obj\Debug\MainWindow.baml
+C:\Users\CS-Z21\Documents\Visual Studio 2012\Projects\OpenCV-WPF-Kinect-master\KinectWPFOpenCV\obj\Debug\App.baml
+C:\Users\CS-Z21\Documents\Visual Studio 2012\Projects\OpenCV-WPF-Kinect-master\KinectWPFOpenCV\obj\Debug\MainWindow.g.cs
+C:\Users\CS-Z21\Documents\Visual Studio 2012\Projects\OpenCV-WPF-Kinect-master\KinectWPFOpenCV\obj\Debug\App.g.cs
+C:\Users\CS-Z21\Documents\Visual Studio 2012\Projects\OpenCV-WPF-Kinect-master\KinectWPFOpenCV\obj\Debug\KinectWPFOpenCV_Content.g.cs
+C:\Users\CS-Z21\Documents\Visual Studio 2012\Projects\OpenCV-WPF-Kinect-master\KinectWPFOpenCV\obj\Debug\KinectWPFOpenCV_MarkupCompile.cache
+C:\Users\CS-Z21\Documents\Visual Studio 2012\Projects\OpenCV-WPF-Kinect-master\KinectWPFOpenCV\obj\Debug\KinectWPFOpenCV.g.resources
+C:\Users\CS-Z21\Documents\Visual Studio 2012\Projects\OpenCV-WPF-Kinect-master\KinectWPFOpenCV\obj\Debug\KinectWPFOpenCV.Properties.Resources.resources
+C:\Users\CS-Z21\Documents\Visual Studio 2012\Projects\OpenCV-WPF-Kinect-master\KinectWPFOpenCV\obj\Debug\KinectWPFOpenCV.csproj.GenerateResource.Cache
+C:\Users\CS-Z21\Documents\Visual Studio 2012\Projects\OpenCV-WPF-Kinect-master\KinectWPFOpenCV\bin\Debug\opencv_core231.dll
+C:\Users\CS-Z21\Documents\Visual Studio 2012\Projects\OpenCV-WPF-Kinect-master\KinectWPFOpenCV\bin\Debug\opencv_highgui231.dll
+C:\Users\CS-Z21\Documents\Visual Studio 2012\Projects\OpenCV-WPF-Kinect-master\KinectWPFOpenCV\bin\Debug\opencv_imgproc231.dll
+C:\Users\CS-Z21\Documents\Visual Studio 2012\Projects\OpenCV-WPF-Kinect-master\KinectWPFOpenCV\bin\Debug\KinectWPFOpenCV.exe
+C:\Users\CS-Z21\Documents\Visual Studio 2012\Projects\OpenCV-WPF-Kinect-master\KinectWPFOpenCV\bin\Debug\KinectWPFOpenCV.pdb
+C:\Users\CS-Z21\Documents\Visual Studio 2012\Projects\OpenCV-WPF-Kinect-master\KinectWPFOpenCV\bin\Debug\Emgu.CV.dll
+C:\Users\CS-Z21\Documents\Visual Studio 2012\Projects\OpenCV-WPF-Kinect-master\KinectWPFOpenCV\bin\Debug\Emgu.CV.UI.dll
+C:\Users\CS-Z21\Documents\Visual Studio 2012\Projects\OpenCV-WPF-Kinect-master\KinectWPFOpenCV\bin\Debug\Emgu.Util.dll
+C:\Users\CS-Z21\Documents\Visual Studio 2012\Projects\OpenCV-WPF-Kinect-master\KinectWPFOpenCV\bin\Debug\ZedGraph.dll
+C:\Users\CS-Z21\Documents\Visual Studio 2012\Projects\OpenCV-WPF-Kinect-master\KinectWPFOpenCV\bin\Debug\Emgu.CV.xml
+C:\Users\CS-Z21\Documents\Visual Studio 2012\Projects\OpenCV-WPF-Kinect-master\KinectWPFOpenCV\bin\Debug\Emgu.CV.UI.xml
+C:\Users\CS-Z21\Documents\Visual Studio 2012\Projects\OpenCV-WPF-Kinect-master\KinectWPFOpenCV\bin\Debug\Emgu.Util.xml
+C:\Users\Burak\Dropbox\OpenCV-WPF-Kinect-master\OpenCV-WPF-Kinect-master\KinectWPFOpenCV\bin\Debug\opencv_core231.dll
+C:\Users\Burak\Dropbox\OpenCV-WPF-Kinect-master\OpenCV-WPF-Kinect-master\KinectWPFOpenCV\bin\Debug\opencv_highgui231.dll
+C:\Users\Burak\Dropbox\OpenCV-WPF-Kinect-master\OpenCV-WPF-Kinect-master\KinectWPFOpenCV\bin\Debug\opencv_imgproc231.dll
+C:\Users\Burak\Dropbox\OpenCV-WPF-Kinect-master\OpenCV-WPF-Kinect-master\KinectWPFOpenCV\bin\Debug\KinectWPFOpenCV.exe.config
+C:\Users\Burak\Dropbox\OpenCV-WPF-Kinect-master\OpenCV-WPF-Kinect-master\KinectWPFOpenCV\bin\Debug\KinectWPFOpenCV.exe
+C:\Users\Burak\Dropbox\OpenCV-WPF-Kinect-master\OpenCV-WPF-Kinect-master\KinectWPFOpenCV\bin\Debug\KinectWPFOpenCV.pdb
+C:\Users\Burak\Dropbox\OpenCV-WPF-Kinect-master\OpenCV-WPF-Kinect-master\KinectWPFOpenCV\obj\Debug\MainWindow.baml
+C:\Users\Burak\Dropbox\OpenCV-WPF-Kinect-master\OpenCV-WPF-Kinect-master\KinectWPFOpenCV\obj\Debug\App.baml
+C:\Users\Burak\Dropbox\OpenCV-WPF-Kinect-master\OpenCV-WPF-Kinect-master\KinectWPFOpenCV\obj\Debug\MainWindow.g.cs
+C:\Users\Burak\Dropbox\OpenCV-WPF-Kinect-master\OpenCV-WPF-Kinect-master\KinectWPFOpenCV\obj\Debug\App.g.cs
+C:\Users\Burak\Dropbox\OpenCV-WPF-Kinect-master\OpenCV-WPF-Kinect-master\KinectWPFOpenCV\obj\Debug\KinectWPFOpenCV_Content.g.cs
+C:\Users\Burak\Dropbox\OpenCV-WPF-Kinect-master\OpenCV-WPF-Kinect-master\KinectWPFOpenCV\obj\Debug\KinectWPFOpenCV_MarkupCompile.cache
+C:\Users\Burak\Dropbox\OpenCV-WPF-Kinect-master\OpenCV-WPF-Kinect-master\KinectWPFOpenCV\obj\Debug\KinectWPFOpenCV.g.resources
+C:\Users\Burak\Dropbox\OpenCV-WPF-Kinect-master\OpenCV-WPF-Kinect-master\KinectWPFOpenCV\obj\Debug\KinectWPFOpenCV.Properties.Resources.resources
+C:\Users\Burak\Dropbox\OpenCV-WPF-Kinect-master\OpenCV-WPF-Kinect-master\KinectWPFOpenCV\obj\Debug\KinectWPFOpenCV.csproj.GenerateResource.Cache
+C:\Users\Burak\Dropbox\OpenCV-WPF-Kinect-master\OpenCV-WPF-Kinect-master\KinectWPFOpenCV\obj\Debug\KinectWPFOpenCV.exe
+C:\Users\Burak\Dropbox\OpenCV-WPF-Kinect-master\OpenCV-WPF-Kinect-master\KinectWPFOpenCV\obj\Debug\KinectWPFOpenCV.pdb
+C:\Users\Burak\Dropbox\OpenCV-WPF-Kinect-master\OpenCV-WPF-Kinect-master\KinectWPFOpenCV\obj\Debug\KinectWPFOpenCV.csprojResolveAssemblyReference.cache
