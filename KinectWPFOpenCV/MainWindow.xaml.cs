@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -25,26 +26,11 @@ namespace KinectWPFOpenCV
     /// </summary>
     public partial class MainWindow : Window
     {
-        //Codec integer values
-        
-        int motionJpeg = CvInvoke.CV_FOURCC('M', 'J', 'P', 'G');
-        int mpeg1 = CvInvoke.CV_FOURCC('P', 'I', 'M', '1');
-        int mpeg42 = CvInvoke.CV_FOURCC('M', 'P', '4', '2');
-        int mpeg43 = CvInvoke.CV_FOURCC('D', 'I', 'V', '3');
-        int mpeg4 = CvInvoke.CV_FOURCC('D', 'I', 'V', 'X');
-        int h263 = CvInvoke.CV_FOURCC('U', '2', '6', '3');
-        int h263i = CvInvoke.CV_FOURCC('I', '2', '6', '3');
-        int flv1 = CvInvoke.CV_FOURCC('F', 'L', 'V', '1');
-        int yuv = CvInvoke.CV_FOURCC('I', 'Y', 'U', 'V');
-        
-        
-        //VideoWriter vidRecorder;
-
-        int counter = 0;
+        int c = 0;
         int c2 = 0;
         bool start = false;
-     
 
+        List<BackgroundWorker> workerList;
         KinectSensor sensor;
         WriteableBitmap depthBitmap;
         WriteableBitmap colorBitmap;
@@ -56,6 +42,7 @@ namespace KinectWPFOpenCV
         public MainWindow()
         {
             InitializeComponent();
+            InitializeWorkers();
 
             this.Loaded += MainWindow_Loaded;
             this.Closing += MainWindow_Closing;
@@ -63,6 +50,21 @@ namespace KinectWPFOpenCV
 
         }
 
+        void InitializeWorkers(){
+            workerList = new List<BackgroundWorker>();
+            for(int i=0; i<100; ++i){
+                BackgroundWorker x = new BackgroundWorker();
+                x.DoWork += new DoWorkEventHandler(bg_DoWork);
+                workerList.Add(new BackgroundWorker());
+            }
+        }
+
+        BackgroundWorker getNext()
+        {
+            BackgroundWorker x = workerList.ElementAt(c%100);
+            c++;
+            return x;
+        }
       
         void MainWindow_Loaded(object sender, RoutedEventArgs e)
         {
@@ -110,6 +112,28 @@ namespace KinectWPFOpenCV
 
         }
 
+        private void bg_DoWork(object sender, DoWorkEventArgs e)
+        {
+            BackgroundWorker worker = sender as BackgroundWorker;
+            
+            ((Image<Bgr, Byte>)e.Argument).ToBitmap().Save("c:\\images\\test" + c2 + ".png");
+
+            e.Result = 0;
+        }
+
+        private int saveImage(Image<Bgr, Byte> args, BackgroundWorker worker)
+        {
+            args.ToBitmap().Save("c:\\images\\test" + c2 + ".png");
+
+            return 0;
+        }
+
+        private void bg_RunWorkerCompleted(
+            object sender, RunWorkerCompletedEventArgs e)
+        {
+            c2++;
+        }
+
         private void sensor_AllFramesReady(object sender, AllFramesReadyEventArgs e)
         {
             BitmapSource depthBmp = null;
@@ -153,29 +177,7 @@ namespace KinectWPFOpenCV
                         this.outImg.Source = ImageHelpers.ToBitmapSource(openCVImg);                        
                         txtBlobCount.Text = blobCount.ToString();
 
-                        if (!start && blobCount > 0)
-                        {
-                            start = true;
-                        }
-                        if (start)
-                        {
-                            if (openCVImg != null)
-                            {
-                                //TODO Out of UI thread
-                                //(openCVImg.ToBitmap().Save("c:\\images\\test" + c2 + ".png");
-                                c2++;
-                            }
-                        } 
-                        /*
-                        counter++;
-                        if (counter == 2)
-                        {
-                            counter = 0;
-                        }
-                        */
-                        
-
-                        
+                        getNext().RunWorkerAsync(openCVImg);
                     }
                 }
 
