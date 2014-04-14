@@ -1,0 +1,35 @@
+\documentclass[12pt,a4paper]{report}
+\usepackage[pdftex]{graphicx} %for embedding images
+\usepackage{url} %for proper url entries
+\usepackage{subfig}
+\usepackage[numbers]{natbib}
+\usepackage[bookmarks, colorlinks=false, pdfborder={0 0 0}, pdftitle={<pdf title here>}, pdfauthor={Cagri Sofuoglu}, pdfsubject={<subject here>}, pdfkeywords={<CMPE492_Report}]{hyperref} %for creating links in the pdf version and other additional pdf attributes, no effect on the printed document
+%\usepackage[final]{pdfpages} %for embedding another pdf, remove if not required
+
+\begin{document}
+\renewcommand\bibname{References} %Renames "Bibliography" to "References" on ref page
+
+%include other pages
+\input{./title.tex}
+\input{./certificate.tex}
+\input{./abstract.tex}
+
+\pagenumbering{roman} %numbering before main content starts
+\tableofcontents
+\listoffigures
+
+\newpage
+\pagenumbering{arabic} %reset numbering to normal for the main content
+
+\input{./prob-definition.tex} %objective changed to problem definition
+\input{./introduction.tex} %literature survey included in this
+\input{./work-done.tex}
+\input{./future-work.tex}
+\input{./conclusion.tex}
+\input{./acknow.tex}
+
+\addcontentsline{toc}{chapter}{References}
+\bibliographystyle{plainnat}
+\bibliography{ref}
+
+\end{document}
