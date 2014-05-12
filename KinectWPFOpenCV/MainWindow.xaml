@@ -62,7 +62,9 @@
                     <TextBlock Text="Blobs Detected" Margin="10 0 0 0" />
                     <TextBlock TextWrapping="Wrap" x:Name="txtBlobCount" Text="0" Margin="10 0 0 0" />
                 </StackPanel>
-                <TextBlock TextWrapping="Wrap" x:Name="txtInfo" Text="" Padding="10"/>
+                <TextBlock TextWrapping="Wrap" x:Name="txtInfo" Padding="10"><InlineUIContainer>
+                		<CheckBox x:Name="Record" Content="Record" Click="Record_Click"/>
+                	</InlineUIContainer></TextBlock>
 
             </StackPanel>
 

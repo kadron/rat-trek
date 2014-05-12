@@ -26,6 +26,7 @@ namespace KinectWPFOpenCV
     /// </summary>
     public partial class MainWindow : Window
     {
+        bool rec = false;
         int c = 0;
         int c2 = 0;
         bool start = false;
@@ -35,6 +36,7 @@ namespace KinectWPFOpenCV
         WriteableBitmap depthBitmap;
         WriteableBitmap colorBitmap;
         DepthImagePixel[] depthPixels;
+        VideoWriter vw;
         byte[] colorPixels;
 
         int blobCount = 0;
@@ -55,7 +57,7 @@ namespace KinectWPFOpenCV
             for(int i=0; i<100; ++i){
                 BackgroundWorker x = new BackgroundWorker();
                 x.DoWork += new DoWorkEventHandler(bg_DoWork);
-                workerList.Add(new BackgroundWorker());
+                workerList.Add(x);
             }
         }
 
@@ -89,7 +91,7 @@ namespace KinectWPFOpenCV
                 this.colorBitmap = new WriteableBitmap(this.sensor.ColorStream.FrameWidth, this.sensor.ColorStream.FrameHeight, 96.0, 96.0, PixelFormats.Bgr32, null);
                 this.depthBitmap = new WriteableBitmap(this.sensor.DepthStream.FrameWidth, this.sensor.DepthStream.FrameHeight, 96.0, 96.0, PixelFormats.Bgr32, null);                
                 this.colorImg.Source = this.colorBitmap;
-
+                vw = new VideoWriter("C:\\Users\\CS-Z21\\Desktop\\KinectVid\\test.avi", 30, this.sensor.DepthStream.FrameWidth, this.sensor.DepthStream.FrameHeight, true);
                 this.sensor.AllFramesReady += this.sensor_AllFramesReady;
 
                 try
@@ -115,23 +117,24 @@ namespace KinectWPFOpenCV
         private void bg_DoWork(object sender, DoWorkEventArgs e)
         {
             BackgroundWorker worker = sender as BackgroundWorker;
-            
-            ((Image<Bgr, Byte>)e.Argument).ToBitmap().Save("c:\\images\\test" + c2 + ".png");
-
+            if (rec)
+            {
+                vw.WriteFrame((Image<Bgr, Byte>)e.Argument);
+            }
+           
             e.Result = 0;
         }
 
         private int saveImage(Image<Bgr, Byte> args, BackgroundWorker worker)
         {
-            args.ToBitmap().Save("c:\\images\\test" + c2 + ".png");
+            args.ToBitmap().Save("C:\\Users\\CS-Z21\\Desktop\\KinectVid\\" + c2 + ".png");
 
             return 0;
         }
 
-        private void bg_RunWorkerCompleted(
-            object sender, RunWorkerCompletedEventArgs e)
+        private void bg_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
-            c2++;
+            
         }
 
         private void sensor_AllFramesReady(object sender, AllFramesReadyEventArgs e)
@@ -167,7 +170,8 @@ namespace KinectWPFOpenCV
 
                                 if ((contours.Area > Math.Pow(sliderMinSize.Value, 2)) && (contours.Area < Math.Pow(sliderMaxSize.Value, 2)))
                                 {
-                                    MCvBox2D box = contours.GetMinAreaRect();                                    
+                                    MCvBox2D box = contours.GetMinAreaRect();
+                                    //DrQ RED BOX AROUND BLOB   
                                     openCVImg.Draw(box, new Bgr(System.Drawing.Color.Red), 2);                                    
                                     blobCount++;
                                 }
@@ -214,8 +218,21 @@ namespace KinectWPFOpenCV
 
         private void CloseBtnClick(object sender, RoutedEventArgs e)
         {
+            this.vw.Dispose();
             this.Close();
         }
         #endregion
+
+        private void Record_Click(object sender, RoutedEventArgs e)
+        {
+            CheckBox chk = (CheckBox)sender;
+
+            if ((bool)chk.IsChecked)
+                rec=true;
+            else
+                rec=false;
+        }
+
+       
     }
 }
