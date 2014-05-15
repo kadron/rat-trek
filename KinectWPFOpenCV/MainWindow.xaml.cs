@@ -27,6 +27,7 @@ namespace KinectWPFOpenCV
     public partial class MainWindow : Window
     {
         bool rec = false;
+        bool running = false;
         int c = 0;
         int c2 = 0;
         bool start = false;
@@ -92,18 +93,20 @@ namespace KinectWPFOpenCV
                 this.depthBitmap = new WriteableBitmap(this.sensor.DepthStream.FrameWidth, this.sensor.DepthStream.FrameHeight, 96.0, 96.0, PixelFormats.Bgr32, null);                
                 this.colorImg.Source = this.colorBitmap;
                 vw = new VideoWriter("C:\\Users\\CS-Z21\\Desktop\\KinectVid\\test.avi", 30, this.sensor.DepthStream.FrameWidth, this.sensor.DepthStream.FrameHeight, true);
+
                 this.sensor.AllFramesReady += this.sensor_AllFramesReady;
 
                 try
                 {
                     this.sensor.Start();
                 }
-                catch (IOException)
+                    catch (IOException)
                 {
                     this.sensor = null;
                 }
-            }
 
+                
+            }
             if (null == this.sensor)
             {
                 this.outputViewbox.Visibility = System.Windows.Visibility.Collapsed;
@@ -156,26 +159,29 @@ namespace KinectWPFOpenCV
                         Image<Bgr, Byte> openCVImg = new Image<Bgr, byte>(depthBmp.ToBitmap());
                         Image<Gray, byte> gray_image = openCVImg.Convert<Gray, byte>();
 
-                        using (MemStorage stor = new MemStorage())
+                        if (running)
                         {
-                            //Find contours with no holes try CV_RETR_EXTERNAL to find holes
-                            Contour<System.Drawing.Point> contours = gray_image.FindContours(
-                             Emgu.CV.CvEnum.CHAIN_APPROX_METHOD.CV_CHAIN_APPROX_SIMPLE,
-                             Emgu.CV.CvEnum.RETR_TYPE.CV_RETR_EXTERNAL,
-                             stor);
-
-                            for (int i = 0; contours != null; contours = contours.HNext)
+                            using (MemStorage stor = new MemStorage())
                             {
-                                i++;
+                                //Find contours with no holes try CV_RETR_EXTERNAL to find holes
+                                Contour<System.Drawing.Point> contours = gray_image.FindContours(
+                                 Emgu.CV.CvEnum.CHAIN_APPROX_METHOD.CV_CHAIN_APPROX_SIMPLE,
+                                 Emgu.CV.CvEnum.RETR_TYPE.CV_RETR_EXTERNAL,
+                                 stor);
 
-                                if ((contours.Area > Math.Pow(sliderMinSize.Value, 2)) && (contours.Area < Math.Pow(sliderMaxSize.Value, 2)))
+                                for (int i = 0; contours != null; contours = contours.HNext)
                                 {
-                                    MCvBox2D box = contours.GetMinAreaRect();
-                                    //DrQ RED BOX AROUND BLOB   
-                                    openCVImg.Draw(box, new Bgr(System.Drawing.Color.Red), 2);                                    
-                                    blobCount++;
+                                    i++;
+
+                                    if ((contours.Area > Math.Pow(sliderMinSize.Value, 2)) && (contours.Area < Math.Pow(sliderMaxSize.Value, 2)))
+                                    {
+                                        MCvBox2D box = contours.GetMinAreaRect();
+                                        //DrQ RED BOX AROUND BLOB   
+                                        openCVImg.Draw(box, new Bgr(System.Drawing.Color.Red), 2);
+                                        blobCount++;
+                                    }
                                 }
-                            }
+                            } 
                         }
 
                         this.outImg.Source = ImageHelpers.ToBitmapSource(openCVImg);                        
@@ -232,6 +238,31 @@ namespace KinectWPFOpenCV
             else
                 rec=false;
         }
+
+        private void btn_startStop_Click(object sender, RoutedEventArgs e)
+        {
+            Button startStop = sender as Button;
+            if ((String)startStop.Content == "Start")
+            {
+                this.btn_startStop.Content = "Stop";
+                running = true;
+            }
+            else if ((String)startStop.Content == "Stop")
+            {
+                this.btn_startStop.Content = "Start";
+                running = false;
+            }
+        }
+
+        private void btn_New_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        
+
+        
+     
 
        
     }
