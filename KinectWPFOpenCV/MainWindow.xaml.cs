@@ -31,6 +31,7 @@ namespace KinectWPFOpenCV
         int c = 0;
         int c2 = 0;
         bool start = false;
+        String recordLoc = "C:\\Users\\Burak\\Desktop\\KinectVid\\test.avi";
 
         List<BackgroundWorker> workerList;
         KinectSensor sensor;
@@ -84,7 +85,7 @@ namespace KinectWPFOpenCV
 
             if (null != this.sensor)
             {
-
+                //Depth Stream allows 320x240 resolution as well.
                 this.sensor.DepthStream.Enable(DepthImageFormat.Resolution640x480Fps30);
                 this.sensor.ColorStream.Enable(ColorImageFormat.RgbResolution640x480Fps30);
                 this.colorPixels = new byte[this.sensor.ColorStream.FramePixelDataLength];
@@ -92,7 +93,7 @@ namespace KinectWPFOpenCV
                 this.colorBitmap = new WriteableBitmap(this.sensor.ColorStream.FrameWidth, this.sensor.ColorStream.FrameHeight, 96.0, 96.0, PixelFormats.Bgr32, null);
                 this.depthBitmap = new WriteableBitmap(this.sensor.DepthStream.FrameWidth, this.sensor.DepthStream.FrameHeight, 96.0, 96.0, PixelFormats.Bgr32, null);                
                 this.colorImg.Source = this.colorBitmap;
-                vw = new VideoWriter("C:\\Users\\CS-Z21\\Desktop\\KinectVid\\test.avi", 30, this.sensor.DepthStream.FrameWidth, this.sensor.DepthStream.FrameHeight, true);
+                vw = new VideoWriter(recordLoc, 30, this.sensor.DepthStream.FrameWidth, this.sensor.DepthStream.FrameHeight, true);
 
                 this.sensor.AllFramesReady += this.sensor_AllFramesReady;
 
@@ -122,18 +123,28 @@ namespace KinectWPFOpenCV
             BackgroundWorker worker = sender as BackgroundWorker;
             if (rec)
             {
-                vw.WriteFrame((Image<Bgr, Byte>)e.Argument);
+                try {
+                    vw.WriteFrame((Image<Bgr, Byte>)e.Argument);
+                }
+                catch (InvalidOperationException exp) {
+                    //Do nothing
+                    //This exception happens when bg workers try to save 
+                    //the frame while the program is closed and video saved
+                }
+                
             }
            
             e.Result = 0;
         }
 
+        /*
         private int saveImage(Image<Bgr, Byte> args, BackgroundWorker worker)
         {
-            args.ToBitmap().Save("C:\\Users\\CS-Z21\\Desktop\\KinectVid\\" + c2 + ".png");
+            args.ToBitmap().Save("C:\\Users\\Burak\\Desktop\\KinectVid\\" + c2 + ".png");
 
             return 0;
         }
+        */
 
         private void bg_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
@@ -224,6 +235,8 @@ namespace KinectWPFOpenCV
 
         private void CloseBtnClick(object sender, RoutedEventArgs e)
         {
+            //TODO Do you want to exit prompt
+            rec = false;
             this.vw.Dispose();
             this.Close();
         }
@@ -256,7 +269,7 @@ namespace KinectWPFOpenCV
 
         private void btn_New_Click(object sender, RoutedEventArgs e)
         {
-
+            //TODO New Experiment button functionality
         }
 
         
