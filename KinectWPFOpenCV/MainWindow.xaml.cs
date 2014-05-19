@@ -18,6 +18,7 @@ using Microsoft.Kinect;
 using Emgu.CV;
 using Emgu.CV.Structure;
 using System.IO;
+using System.Configuration;
 
 namespace KinectWPFOpenCV
 {
@@ -31,7 +32,7 @@ namespace KinectWPFOpenCV
         int c = 0;
         int c2 = 0;
         bool start = false;
-        String recordLoc = "C:\\Users\\Burak\\Desktop\\KinectVid\\test.avi";
+        String recordLoc = "C:\\KinectVid\\test.avi";
 
         List<BackgroundWorker> workerList;
         KinectSensor sensor;
@@ -237,7 +238,10 @@ namespace KinectWPFOpenCV
         {
             //TODO Do you want to exit prompt
             rec = false;
-            this.vw.Dispose();
+            if (!this.vw.Equals(null))
+            {
+                this.vw.Dispose();    
+            } 
             this.Close();
         }
         #endregion
@@ -269,14 +273,9 @@ namespace KinectWPFOpenCV
 
         private void btn_New_Click(object sender, RoutedEventArgs e)
         {
-            //TODO New Experiment button functionality
+            //Launch experiment setup initial page
+            NewExp newExp = new NewExp();
+            newExp.ShowDialog();
         }
-
-        
-
-        
-     
-
-       
     }
 }

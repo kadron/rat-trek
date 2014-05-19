@@ -1,0 +1,31 @@
+﻿<Window x:Name="Setup_First_Cage" x:Class="KinectWPFOpenCV.Cage1"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Setup First Cage" Height="800" Width="800">
+    <Grid>
+        <Image x:Name="cimg_cage1" HorizontalAlignment="Left" Height="480" Margin="80,200,0,0" VerticalAlignment="Top" Width="640"/>
+        <Slider x:Name="sld_c1_dX" HorizontalAlignment="Left" Margin="80,685,0,0" VerticalAlignment="Top" Width="640" Maximum="600"/>
+        <Slider x:Name="sld_c1_sX" HorizontalAlignment="Left" Margin="80,173,0,0" VerticalAlignment="Top" Width="640" Maximum="600"/>
+        <Slider x:Name="sld_c1_sY" Margin="-174,426,0,0" Width="480" RenderTransformOrigin="0.5,0.5" HorizontalAlignment="Left" VerticalAlignment="Top" Maximum="480">
+            <Slider.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="90"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Slider.RenderTransform>
+        </Slider>
+        <Slider x:Name="sld_c1_dY" Margin="499,426,-187,0" Width="480" RenderTransformOrigin="0.5,0.5" HorizontalAlignment="Left" VerticalAlignment="Top" Maximum="480">
+            <Slider.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="90"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Slider.RenderTransform>
+        </Slider>
+
+    </Grid>
+</Window>

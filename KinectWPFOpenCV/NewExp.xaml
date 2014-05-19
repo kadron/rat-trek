@@ -1,0 +1,11 @@
+﻿<Window x:Class="KinectWPFOpenCV.NewExp"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Setup New Experiment" Height="300" Width="600">
+    <Grid>
+        <Button Content="Browse" HorizontalAlignment="Left" Margin="480,98,0,0" VerticalAlignment="Top" Width="75" Click="Button_Click"/>
+        <TextBox x:Name="fPath" HorizontalAlignment="Left" Height="23" Margin="28,98,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="447" Text="Folder Path"/>
+        <TextBox x:Name="eName" HorizontalAlignment="Left" Height="23" Margin="28,54,0,0" TextWrapping="Wrap" Text="Name of the experiment" VerticalAlignment="Top" Width="447" TextChanged="eName_TextChanged"/>
+        <Button x:Name="btn_toNew2" Content="Next" HorizontalAlignment="Left" Margin="480,227,0,0" VerticalAlignment="Top" Width="75" RenderTransformOrigin="-0.493,-1.455" Click="btn_toNew2_Click"/>
+    </Grid>
+</Window>
