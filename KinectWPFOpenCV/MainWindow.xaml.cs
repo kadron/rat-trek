@@ -252,11 +252,12 @@ namespace KinectWPFOpenCV
         {
             //TODO Do you want to exit prompt
             rec = false;
+            /*
             if (pck != null)
             {
                 pck.Save();
                 //System.Diagnostics.Process.Start(excelLoc);
-            }
+            }*/
 
             if (!this.vw.Equals(null))
             {
