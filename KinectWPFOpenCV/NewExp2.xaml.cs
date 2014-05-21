@@ -36,7 +36,6 @@ namespace KinectWPFOpenCV
             Cage1 c1 = new Cage1();
             this.Close();
             c1.ShowDialog();
-            
         }
 
         private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)

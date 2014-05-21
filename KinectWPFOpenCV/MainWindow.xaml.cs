@@ -35,7 +35,7 @@ namespace KinectWPFOpenCV
         String recordLoc = "C:\\KinectVid\\test.avi";
 
         List<BackgroundWorker> workerList;
-        KinectSensor sensor;
+        public KinectSensor sensor;
         WriteableBitmap depthBitmap;
         WriteableBitmap colorBitmap;
         DepthImagePixel[] depthPixels;
