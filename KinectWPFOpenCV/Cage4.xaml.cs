@@ -25,19 +25,19 @@ namespace KinectWPFOpenCV
     /// <summary>
     /// Interaction logic for Cage1.xaml
     /// </summary>
-    public partial class Cage2 : Window
+    public partial class Cage4 : Window
     {
         KinectSensor sensor;
         WriteableBitmap colorBitmap;
         DepthImagePixel[] depthPixels;
         byte[] colorPixels;
-        public Cage2()
+        public Cage4()
         {
             InitializeComponent();
-            this.Loaded += Cage2_Loaded;
+            this.Loaded += Cage4_Loaded;
             //this.cimg_cage1.Source = this.colorBitmap;
         }
-        void Cage2_Loaded(object sender, RoutedEventArgs e)
+        void Cage4_Loaded(object sender, RoutedEventArgs e)
         {
             foreach (var potentialSensor in KinectSensor.KinectSensors)
             {
@@ -54,7 +54,7 @@ namespace KinectWPFOpenCV
                 this.sensor.ColorStream.Enable(ColorImageFormat.RgbResolution640x480Fps30);
                 this.colorPixels = new byte[this.sensor.ColorStream.FramePixelDataLength];
                 this.colorBitmap = new WriteableBitmap(this.sensor.ColorStream.FrameWidth, this.sensor.ColorStream.FrameHeight, 96.0, 96.0, PixelFormats.Bgr32, null);
-                this.cimg_cage2.Source = this.colorBitmap;
+                this.cimg_cage4.Source = this.colorBitmap;
                 this.sensor.AllFramesReady += this.sensor_AllFramesReady;
                 try
                 {
@@ -95,7 +95,7 @@ namespace KinectWPFOpenCV
                     Image<Bgr, Byte> openCVImg = new Image<Bgr, byte>(colorBitmap.ToBitmap());
                     MCvBox2D box = new MCvBox2D(new PointF(cx, cy), new SizeF(new PointF((float)w, (float)h)), 0);
                     openCVImg.Draw(box, new Bgr(System.Drawing.Color.Green), 4);
-                    this.cimg_cage2.Source = ImageHelpers.ToBitmapSource(openCVImg);
+                    this.cimg_cage4.Source = ImageHelpers.ToBitmapSource(openCVImg);
                     //Dimensions of the cage known at this point 
                     //TODO write to config file
                 }

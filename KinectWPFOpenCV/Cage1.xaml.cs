@@ -97,6 +97,8 @@ namespace KinectWPFOpenCV
                     MCvBox2D box = new MCvBox2D(new PointF(cx, cy),new SizeF(new PointF((float)w,(float)h)),0);
                     openCVImg.Draw(box, new Bgr(System.Drawing.Color.Green), 4);
                     this.cimg_cage1.Source = ImageHelpers.ToBitmapSource(openCVImg); 
+                    //Dimensions of the cage known at this point 
+                    //TODO write to config file
                 }
             }
         }
