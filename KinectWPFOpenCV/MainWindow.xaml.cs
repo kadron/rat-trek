@@ -36,12 +36,12 @@ namespace KinectWPFOpenCV
         bool start = false;
         String recordLoc = "C:\\KinectVid\\test.avi";
         String excelLoc = "C:\\KinectVid\\test.xlsx";
+        double mmPixelRatio = 3.2;
+        int frameCount = 1;
 
         List<BackgroundWorker> workerList;
         ExcelPackage pck;
         ExcelWorksheet wsheet;
-
-
 
         KinectSensor sensor;
 
@@ -61,6 +61,14 @@ namespace KinectWPFOpenCV
             this.Loaded += MainWindow_Loaded;
             this.Closing += MainWindow_Closing;
             this.MouseDown += MainWindow_MouseDown;
+
+            System.Diagnostics.Process process = new System.Diagnostics.Process();
+            System.Diagnostics.ProcessStartInfo startInfo = new System.Diagnostics.ProcessStartInfo();
+            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
+            startInfo.FileName = "cmd.exe";
+            startInfo.Arguments = "/C mkdir C:\\KinectVid";
+            process.StartInfo = startInfo;
+            process.Start();
 
         }
 
@@ -103,11 +111,28 @@ namespace KinectWPFOpenCV
                 this.colorBitmap = new WriteableBitmap(this.sensor.ColorStream.FrameWidth, this.sensor.ColorStream.FrameHeight, 96.0, 96.0, PixelFormats.Bgr32, null);
                 this.depthBitmap = new WriteableBitmap(this.sensor.DepthStream.FrameWidth, this.sensor.DepthStream.FrameHeight, 96.0, 96.0, PixelFormats.Bgr32, null);                
                 this.colorImg.Source = this.colorBitmap;
+                
                 vw = new VideoWriter(recordLoc, 30, this.sensor.DepthStream.FrameWidth, this.sensor.DepthStream.FrameHeight, true);
-                pck = new ExcelPackage(new FileInfo(excelLoc));
+                FileInfo newFile = new FileInfo(excelLoc);
+
+                if (newFile.Exists)
+                {
+                    newFile.Delete();
+                    newFile = new FileInfo(excelLoc);
+                }
+
+                pck = new ExcelPackage(newFile);
                 wsheet = pck.Workbook.Worksheets.Add("Mice Data");
+
                 this.sensor.AllFramesReady += this.sensor_AllFramesReady;
 
+                wsheet.Cells[1, 1].Value = "Coord/Frame #";
+                for (int i = 1; i <= 4; i++)
+                {
+                    wsheet.Cells[2 * i, 1].Value = "Rat " + i + "X";
+                    wsheet.Cells[2 * i + 1, 1].Value = "Rat " + i + "Y";
+                }
+                
                 try
                 {
                     this.sensor.Start();
@@ -187,6 +212,8 @@ namespace KinectWPFOpenCV
 
                         if (running)
                         {
+                            wsheet.Cells[1, frameCount + 1].Value = "Frame " + frameCount;
+                            frameCount++;
                             using (MemStorage stor = new MemStorage())
                             {
                                 //Find contours with no holes try CV_RETR_EXTERNAL to find holes
@@ -194,7 +221,7 @@ namespace KinectWPFOpenCV
                                  Emgu.CV.CvEnum.CHAIN_APPROX_METHOD.CV_CHAIN_APPROX_SIMPLE,
                                  Emgu.CV.CvEnum.RETR_TYPE.CV_RETR_EXTERNAL,
                                  stor);
-
+                                
                                 for (int i = 0; contours != null; contours = contours.HNext)
                                 {
                                     i++;
@@ -205,8 +232,13 @@ namespace KinectWPFOpenCV
                                         //DrQ RED BOX AROUND BLOB   
                                         openCVImg.Draw(box, new Bgr(System.Drawing.Color.Red), 2);
                                         blobCount++;
+                                        //TODO When cages are determined, this snippet will check that box is in the cage
+                                        //and save the coordinates relative to the cage corner and according to cage number
+                                        wsheet.Cells[2 * blobCount, frameCount].Value = box.center.X * mmPixelRatio;
+                                        wsheet.Cells[2 * blobCount + 1, frameCount].Value = box.center.Y * mmPixelRatio;
                                     }
                                 }
+
                             } 
                         }
 
@@ -252,12 +284,12 @@ namespace KinectWPFOpenCV
         {
             //TODO Do you want to exit prompt
             rec = false;
-            /*
+            
             if (pck != null)
             {
                 pck.Save();
                 //System.Diagnostics.Process.Start(excelLoc);
-            }*/
+            }
 
             if (!this.vw.Equals(null))
             {
