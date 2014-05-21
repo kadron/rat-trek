@@ -20,6 +20,7 @@ using Emgu.CV.Structure;
 using OfficeOpenXml;
 using System.IO;
 using System.Configuration;
+using OfficeOpenXml;
 
 namespace KinectWPFOpenCV
 {
@@ -35,10 +36,15 @@ namespace KinectWPFOpenCV
         bool start = false;
         String recordLoc = "C:\\KinectVid\\test.avi";
         String excelLoc = "C:\\KinectVid\\test.xlsx";
+
         List<BackgroundWorker> workerList;
         ExcelPackage pck;
         ExcelWorksheet wsheet;
-        public KinectSensor sensor;
+
+
+
+        KinectSensor sensor;
+
         WriteableBitmap depthBitmap;
         WriteableBitmap colorBitmap;
         DepthImagePixel[] depthPixels;
@@ -158,6 +164,10 @@ namespace KinectWPFOpenCV
 
         private void sensor_AllFramesReady(object sender, AllFramesReadyEventArgs e)
         {
+            //TODO Keep the previous frame image as well,
+            //Compare both on a background process and save it to the worksheet
+            //Convert x&y differences to millimeters according to depth data (distance)
+            //and some trigonometry
             BitmapSource depthBmp = null;
             blobCount = 0;
 
@@ -247,6 +257,7 @@ namespace KinectWPFOpenCV
                 pck.Save();
                 //System.Diagnostics.Process.Start(excelLoc);
             }
+
             if (!this.vw.Equals(null))
             {
                 this.vw.Dispose();    
