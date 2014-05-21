@@ -17,6 +17,7 @@ using System.Drawing;
 using Microsoft.Kinect;
 using Emgu.CV;
 using Emgu.CV.Structure;
+using OfficeOpenXml;
 using System.IO;
 using System.Configuration;
 
@@ -33,8 +34,10 @@ namespace KinectWPFOpenCV
         int c2 = 0;
         bool start = false;
         String recordLoc = "C:\\KinectVid\\test.avi";
-
+        String excelLoc = "C:\\KinectVid\\test.xlsx";
         List<BackgroundWorker> workerList;
+        ExcelPackage pck;
+        ExcelWorksheet wsheet;
         public KinectSensor sensor;
         WriteableBitmap depthBitmap;
         WriteableBitmap colorBitmap;
@@ -95,7 +98,8 @@ namespace KinectWPFOpenCV
                 this.depthBitmap = new WriteableBitmap(this.sensor.DepthStream.FrameWidth, this.sensor.DepthStream.FrameHeight, 96.0, 96.0, PixelFormats.Bgr32, null);                
                 this.colorImg.Source = this.colorBitmap;
                 vw = new VideoWriter(recordLoc, 30, this.sensor.DepthStream.FrameWidth, this.sensor.DepthStream.FrameHeight, true);
-
+                pck = new ExcelPackage(new FileInfo(excelLoc));
+                wsheet = pck.Workbook.Worksheets.Add("Mice Data");
                 this.sensor.AllFramesReady += this.sensor_AllFramesReady;
 
                 try
@@ -238,6 +242,11 @@ namespace KinectWPFOpenCV
         {
             //TODO Do you want to exit prompt
             rec = false;
+            if (pck != null)
+            {
+                pck.Save();
+                //System.Diagnostics.Process.Start(excelLoc);
+            }
             if (!this.vw.Equals(null))
             {
                 this.vw.Dispose();    
