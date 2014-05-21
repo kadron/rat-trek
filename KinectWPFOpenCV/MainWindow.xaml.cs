@@ -19,6 +19,7 @@ using Emgu.CV;
 using Emgu.CV.Structure;
 using System.IO;
 using System.Configuration;
+using OfficeOpenXml;
 
 namespace KinectWPFOpenCV
 {
@@ -33,8 +34,11 @@ namespace KinectWPFOpenCV
         int c2 = 0;
         bool start = false;
         String recordLoc = "C:\\KinectVid\\test.avi";
+        String excelLoc = "C:\\KinectVid\\test.xlsx";
 
         List<BackgroundWorker> workerList;
+        ExcelPackage pck;
+        ExcelWorksheet wsheet;
         KinectSensor sensor;
         WriteableBitmap depthBitmap;
         WriteableBitmap colorBitmap;
@@ -95,6 +99,8 @@ namespace KinectWPFOpenCV
                 this.depthBitmap = new WriteableBitmap(this.sensor.DepthStream.FrameWidth, this.sensor.DepthStream.FrameHeight, 96.0, 96.0, PixelFormats.Bgr32, null);                
                 this.colorImg.Source = this.colorBitmap;
                 vw = new VideoWriter(recordLoc, 30, this.sensor.DepthStream.FrameWidth, this.sensor.DepthStream.FrameHeight, true);
+                pck = new ExcelPackage(new FileInfo(excelLoc));
+                wsheet = pck.Workbook.Worksheets.Add("Mice Data");
 
                 this.sensor.AllFramesReady += this.sensor_AllFramesReady;
 
@@ -154,6 +160,10 @@ namespace KinectWPFOpenCV
 
         private void sensor_AllFramesReady(object sender, AllFramesReadyEventArgs e)
         {
+            //TODO Keep the previous frame image as well,
+            //Compare both on a background process and save it to the worksheet
+            //Convert x&y differences to millimeters according to depth data (distance)
+            //and some trigonometry
             BitmapSource depthBmp = null;
             blobCount = 0;
 
@@ -238,6 +248,12 @@ namespace KinectWPFOpenCV
         {
             //TODO Do you want to exit prompt
             rec = false;
+            if (pck != null)
+            {
+                pck.Save();
+                //System.Diagnostics.Process.Start(excelLoc);
+            }
+
             if (!this.vw.Equals(null))
             {
                 this.vw.Dispose();    
