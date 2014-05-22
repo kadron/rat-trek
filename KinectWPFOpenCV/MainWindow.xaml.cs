@@ -36,18 +36,20 @@ namespace KinectWPFOpenCV
         bool start = false;
         String recordLoc = "C:\\KinectVid\\test.avi";
         String excelLoc = "C:\\KinectVid\\test.xlsx";
-        double mmPixelRatio = 3.2;
         int frameCount = 1;
+        DepthImageFormat depthFormat = DepthImageFormat.Resolution640x480Fps30;
+        ColorImageFormat colorFormat = ColorImageFormat.RgbResolution640x480Fps30;
 
         List<BackgroundWorker> workerList;
         ExcelPackage pck;
         ExcelWorksheet wsheet;
 
         KinectSensor sensor;
-
+        CoordinateMapper mapper;
         WriteableBitmap depthBitmap;
         WriteableBitmap colorBitmap;
         DepthImagePixel[] depthPixels;
+        SkeletonPoint[] skeletonPoints;
         VideoWriter vw;
         byte[] colorPixels;
 
@@ -103,15 +105,16 @@ namespace KinectWPFOpenCV
 
             if (null != this.sensor)
             {
-                //Depth Stream allows 320x240 resolution as well.
-                this.sensor.DepthStream.Enable(DepthImageFormat.Resolution640x480Fps30);
-                this.sensor.ColorStream.Enable(ColorImageFormat.RgbResolution640x480Fps30);
+                this.sensor.DepthStream.Enable(depthFormat);
+                this.sensor.ColorStream.Enable(colorFormat);
                 this.colorPixels = new byte[this.sensor.ColorStream.FramePixelDataLength];
                 this.depthPixels = new DepthImagePixel[this.sensor.DepthStream.FramePixelDataLength];
                 this.colorBitmap = new WriteableBitmap(this.sensor.ColorStream.FrameWidth, this.sensor.ColorStream.FrameHeight, 96.0, 96.0, PixelFormats.Bgr32, null);
                 this.depthBitmap = new WriteableBitmap(this.sensor.DepthStream.FrameWidth, this.sensor.DepthStream.FrameHeight, 96.0, 96.0, PixelFormats.Bgr32, null);                
                 this.colorImg.Source = this.colorBitmap;
-                
+                this.mapper = new CoordinateMapper(sensor);
+                this.skeletonPoints = new SkeletonPoint[307200];
+
                 vw = new VideoWriter(recordLoc, 30, this.sensor.DepthStream.FrameWidth, this.sensor.DepthStream.FrameHeight, true);
                 FileInfo newFile = new FileInfo(excelLoc);
 
@@ -122,16 +125,17 @@ namespace KinectWPFOpenCV
                 }
 
                 pck = new ExcelPackage(newFile);
-                wsheet = pck.Workbook.Worksheets.Add("Mice Data");
+                wsheet = pck.Workbook.Worksheets.Add("Rat Data");
 
-                this.sensor.AllFramesReady += this.sensor_AllFramesReady;
-
-                wsheet.Cells[1, 1].Value = "Coord/Frame #";
+                wsheet.Cells[1, 1].Value = "Coord (m)";
                 for (int i = 1; i <= 4; i++)
                 {
-                    wsheet.Cells[2 * i, 1].Value = "Rat " + i + "X";
-                    wsheet.Cells[2 * i + 1, 1].Value = "Rat " + i + "Y";
+                    wsheet.Cells[3 * i - 1, 1].Value = "Rat " + i + " X";
+                    wsheet.Cells[3 * i, 1].Value = "Rat " + i + " Y";
+                    wsheet.Cells[3 * i + 1, 1].Value = "Rat " + i + " Z";
                 }
+
+                this.sensor.AllFramesReady += this.sensor_AllFramesReady;
                 
                 try
                 {
@@ -156,7 +160,6 @@ namespace KinectWPFOpenCV
 
         private void bg_DoWork(object sender, DoWorkEventArgs e)
         {
-            BackgroundWorker worker = sender as BackgroundWorker;
             if (rec)
             {
                 try {
@@ -171,20 +174,6 @@ namespace KinectWPFOpenCV
             }
            
             e.Result = 0;
-        }
-
-        /*
-        private int saveImage(Image<Bgr, Byte> args, BackgroundWorker worker)
-        {
-            args.ToBitmap().Save("C:\\Users\\Burak\\Desktop\\KinectVid\\" + c2 + ".png");
-
-            return 0;
-        }
-        */
-
-        private void bg_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
-        {
-            
         }
 
         private void sensor_AllFramesReady(object sender, AllFramesReadyEventArgs e)
@@ -222,6 +211,11 @@ namespace KinectWPFOpenCV
                                  Emgu.CV.CvEnum.RETR_TYPE.CV_RETR_EXTERNAL,
                                  stor);
                                 
+                                //Conversion of depthPixels to skeletonPoints which contain all three dimensions in meters.
+                                //The conversion and copying is assumed to be costly but there are no single pixel to single point conversion I could find.
+                                depthFrame.CopyDepthImagePixelDataTo(depthPixels);
+                                //mapper.MapDepthFrameToSkeletonFrame(depthFormat, depthPixels, skeletonPoints);
+
                                 for (int i = 0; contours != null; contours = contours.HNext)
                                 {
                                     i++;
@@ -232,10 +226,22 @@ namespace KinectWPFOpenCV
                                         //DrQ RED BOX AROUND BLOB   
                                         openCVImg.Draw(box, new Bgr(System.Drawing.Color.Red), 2);
                                         blobCount++;
-                                        //TODO When cages are determined, this snippet will check that box is in the cage
-                                        //and save the coordinates relative to the cage corner and according to cage number
-                                        wsheet.Cells[2 * blobCount, frameCount].Value = box.center.X * mmPixelRatio;
-                                        wsheet.Cells[2 * blobCount + 1, frameCount].Value = box.center.Y * mmPixelRatio;
+                                        int x = (int) box.center.X;
+                                        int y = (int) box.center.Y;
+                                        DepthImagePoint p = new DepthImagePoint();
+                                        p.X = x;
+                                        p.Y = y;
+                                        p.Depth = depthPixels[x + 640 * y].Depth;
+                                        SkeletonPoint s = mapper.MapDepthPointToSkeletonPoint(depthFormat, p);
+
+                                        //TODO Conversion from absolute coordinates to relative coordinates
+                                        
+                                        addCoordData(3 * blobCount - 1, frameCount, s.X, s.Y, s.Z);
+                                        /*if (KinectSensor.IsKnownPoint(s))
+                                        {
+                                            addCoordData(3 * blobCount - 1, frameCount, s.X, s.Y, s.Z);
+                                        }*/
+                                        
                                     }
                                 }
 
@@ -264,6 +270,12 @@ namespace KinectWPFOpenCV
             }
         }
 
+        void addCoordData(int r, int c, float x, float y, float z)
+        {
+            wsheet.Cells[r, c].Value = x;
+            wsheet.Cells[r + 1, c].Value = y;
+            wsheet.Cells[r + 2, c].Value = z;
+        }
 
         #region Window Stuff
         void MainWindow_MouseDown(object sender, MouseButtonEventArgs e)
