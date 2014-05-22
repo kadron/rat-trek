@@ -26,6 +26,7 @@
                 </TransformGroup>
             </Slider.RenderTransform>
         </Slider>
+        <Button x:Name="btn_toTıme" Content="Next" HorizontalAlignment="Left" Margin="645,712,0,0" VerticalAlignment="Top" Width="75" Click="btn_toC4_Click"/>
 
     </Grid>
 </Window>

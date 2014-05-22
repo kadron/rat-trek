@@ -31,6 +31,7 @@ namespace KinectWPFOpenCV
         WriteableBitmap colorBitmap;
         DepthImagePixel[] depthPixels;
         byte[] colorPixels;
+        MCvBox2D box;
         public Cage2()
         {
             InitializeComponent();
@@ -47,6 +48,7 @@ namespace KinectWPFOpenCV
                     break;
                 }
             }
+
             if (null != this.sensor)
             {
 
@@ -93,13 +95,22 @@ namespace KinectWPFOpenCV
                     float cx = (float)sx + ((float)w) / 2;
                     float cy = (float)sy + ((float)h) / 2;
                     Image<Bgr, Byte> openCVImg = new Image<Bgr, byte>(colorBitmap.ToBitmap());
-                    MCvBox2D box = new MCvBox2D(new PointF(cx, cy), new SizeF(new PointF((float)w, (float)h)), 0);
+                    box = new MCvBox2D(new PointF(cx, cy), new SizeF(new PointF((float)w, (float)h)), 0);
                     openCVImg.Draw(box, new Bgr(System.Drawing.Color.Green), 4);
                     this.cimg_cage2.Source = ImageHelpers.ToBitmapSource(openCVImg);
                     //Dimensions of the cage known at this point 
                     //TODO write to config file
                 }
             }
+        }
+
+        private void btn_toC3_Click(object sender, RoutedEventArgs e)
+        {
+            //Dimensions of the cage known at this point 
+            //TODO write to config file
+            Cage3 c1 = new Cage3();
+            this.Close();
+            c1.ShowDialog();
         }
     }
 }

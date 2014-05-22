@@ -1,0 +1,16 @@
+﻿<Window x:Name="wTime1" x:Class="KinectWPFOpenCV.wTime"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Finishing" Height="300" Width="600">
+    <Grid>
+        <TextBox x:Name="tHour" HorizontalAlignment="Left" Height="23" Margin="61,60,0,0" TextWrapping="Wrap" Text="Hours" VerticalAlignment="Top" Width="42" TextChanged="tHour_TextChanged"/>
+        <TextBox x:Name="tMin" HorizontalAlignment="Left" Height="23" Margin="108,60,0,0" TextWrapping="Wrap" Text="Minutes" VerticalAlignment="Top" Width="61" TextChanged="tMin_TextChanged"/>
+        <TextBox x:Name="tSec" HorizontalAlignment="Left" Height="23" Margin="174,60,0,0" TextWrapping="Wrap" Text="Seconds" VerticalAlignment="Top" Width="58" TextChanged="tSec_TextChanged"/>
+        <TextBlock HorizontalAlignment="Left" Margin="52,26,0,0" TextWrapping="Wrap" Text="How long shold the experiment continue ?" VerticalAlignment="Top" Width="279"/>
+        <TextBox x:Name="fPath" HorizontalAlignment="Left" Height="23" Margin="52,140,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="279" Text="Folder Path"/>
+        <Button x:Name="btn_browse" Content="Browse" HorizontalAlignment="Left" Margin="336,140,0,0" VerticalAlignment="Top" Width="75" Click="Button_Click"/>
+        <TextBlock HorizontalAlignment="Left" Margin="52,116,0,0" TextWrapping="Wrap" Text="How long shold the experiment continue ?" VerticalAlignment="Top" Width="279"/>
+        <Button x:Name="btn_Done" Content="Done" HorizontalAlignment="Left" Margin="488,224,0,0" VerticalAlignment="Top" Width="75" RenderTransformOrigin="-0.387,-0.682" Click="btn_Done_Click"/>
+
+    </Grid>
+</Window>
